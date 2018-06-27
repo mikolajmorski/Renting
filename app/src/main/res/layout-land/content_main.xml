@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main" tools:context=".MainActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wypożycz"
+        android:id="@+id/btnRent"
+        android:onClick="onClickOpenRentMain"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Zwróć"
+        android:id="@+id/btnReturn"
+        android:layout_below="@+id/btnRent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnRent"
+        android:layout_alignEnd="@+id/btnRent" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dodaj Kostium"
+        android:id="@+id/btnAddCostume"
+        android:layout_below="@+id/btnReturn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnReturn"
+        android:layout_alignEnd="@+id/btnReturn"
+        android:onClick="onClickOpenAddCostume" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data Base Test"
+        android:id="@+id/btnAddClient"
+        android:layout_below="@+id/btnAddCostume"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnAddCostume"
+        android:layout_alignEnd="@+id/btnAddCostume"
+        android:onClick="onClickOpenDataBaseTest" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Open Contact"
+        android:id="@+id/btnContact"
+        android:layout_below="@+id/btnAddClient"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/btnAddClient"
+        android:layout_alignEnd="@+id/btnAddClient"
+        android:onClick="onClickOpenContact" />
+</RelativeLayout>
