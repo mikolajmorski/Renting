@@ -16,4 +16,7 @@
     <string name="title_activity_client_edit">ClientEditActivity</string>
     <string name="title_activity_costume_edit">CostumeEditActivity</string>
     <string name="title_activity_rent_details">RentDetailsActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

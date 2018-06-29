@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -17,13 +18,15 @@ import com.inzynierka.morski.inzynierka.DataBase.Costume.CostumeDataSource;
 import com.inzynierka.morski.inzynierka.Exeptions.NoCostumeInDataBaseException;
 import com.inzynierka.morski.inzynierka.R;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class CostumeAddActivity extends AppCompatActivity {
     private CostumeDataSource dataSource;
-    /*private ListView listCostumes;
-    private ArrayAdapter<String> adapter;*/
+    private EditText editTextCostumeName;
+    private EditText editTextCostumeLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,29 +35,27 @@ public class CostumeAddActivity extends AppCompatActivity {
 
         dataSource = new CostumeDataSource(this);
         dataSource.open();
+        editTextCostumeName     = (EditText)findViewById(R.id.editTextCostumeName);
+        editTextCostumeLabel    = (EditText)findViewById(R.id.editTextCostumeLabel);
     }
 
     public void onClickAddCostumeView (View view){
         switch (view.getId()) {
             case R.id.btnAddCostume:
-                EditText textName = (EditText)findViewById(R.id.editTextCostumeName);
-                String costumeName = textName.getText().toString();
+                if(filledData()){
+                    String costumeName = editTextCostumeName.getText().toString();
+                    String costumeLabel = editTextCostumeLabel.getText().toString();
 
-                EditText textLabel = (EditText)findViewById(R.id.editTextCostumeLabel);
-                String costumeLabel = textLabel.getText().toString();
-
-                try {
-                    Costume costume = dataSource.getCostume(costumeLabel);
-                    if(costume!=null){
-                        Toast.makeText(getBaseContext(),"NIE MOŻNA DODAĆ \nKOSTIUM O PODANEJ METCE ISTNIEJE \nJEGO NAZWA TO:\n" + costume.getName() , Toast.LENGTH_LONG).show();
+                    try {
+                        Costume costume = dataSource.getCostume(costumeLabel);
+                        if(costume!=null){
+                            Toast.makeText(getBaseContext(),"NIE MOŻNA DODAĆ \nKOSTIUM O PODANEJ METCE ISTNIEJE \nJEGO NAZWA TO:\n" + costume.getName() , Toast.LENGTH_LONG).show();
+                        }
+                    } catch (NoCostumeInDataBaseException e) {
+                        dataSource.createCostume(costumeName, costumeLabel);
+                        Toast.makeText(getBaseContext(), "POMYŚLNIE DODANO", Toast.LENGTH_LONG).show();
                     }
-                } catch (NoCostumeInDataBaseException e) {
-                    dataSource.createCostume(costumeName, costumeLabel);
-                    Toast.makeText(getBaseContext(), "POMYŚLNIE DODANO", Toast.LENGTH_LONG).show();
                 }
-
-                /*dataSource.createCostume(costumeName, costumeLabel);
-                Toast.makeText(getBaseContext(), "POMYŚLNIE DODANO", Toast.LENGTH_LONG).show();*/
                 break;
 
             case R.id.btnScannId:
@@ -87,4 +88,15 @@ public class CostumeAddActivity extends AppCompatActivity {
             text.setText(contents);
         }
     }
+
+    private boolean filledData(){
+        if(TextUtils.isEmpty(editTextCostumeName.getText().toString())) {
+            return false;
+        }
+        else if(TextUtils.isEmpty(editTextCostumeLabel.getText().toString())){
+            return false;
+        }
+        return true;
+    }
+
 }
